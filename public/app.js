@@ -32,8 +32,7 @@ function ToastProvider({ children }) {
       {children}
       <div className="fixed bottom-4 right-4 space-y-2 z-50">
         {toasts.map(t => (
-          <div key={t.id} className={`${colors[t.type]} text-white px-4 py-2 rounded shadow-lg text-sm animate-pulse`}>
-            {t.message}
+<div key={t.id} className={`${colors[t.type]} text-white px-4 py-2 rounded shadow-lg text-sm animate-slidein`}>            {t.message}
           </div>
         ))}
       </div>
@@ -109,8 +108,7 @@ function Badge({ children, color }) {
 function Modal({ title, onClose, children }) {
   return (
     <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4" onClick={onClose}>
-      <div className="bg-white dark:bg-slate-800 rounded-lg shadow-lg max-w-2xl w-full max-h-[85vh] overflow-y-auto p-6" onClick={e => e.stopPropagation()}>
-        <div className="flex justify-between items-center mb-4">
+<div className="bg-white dark:bg-slate-800 rounded-lg shadow-lg max-w-2xl w-full max-h-[85vh] overflow-y-auto p-6 animate-fadein" onClick={e => e.stopPropagation()}>        <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-bold dark:text-white">{title}</h2>
           <button onClick={onClose} className="text-slate-400 hover:text-slate-700 dark:hover:text-white text-2xl leading-none">&times;</button>
         </div>
@@ -189,7 +187,7 @@ function Login() {
         <input className="w-full border dark:border-slate-600 dark:bg-slate-700 dark:text-white rounded px-3 py-2 mb-4" value={email} onChange={e => setEmail(e.target.value)} />
         <label className="block text-sm font-medium mb-1 dark:text-slate-300">Password</label>
         <input type="password" className="w-full border dark:border-slate-600 dark:bg-slate-700 dark:text-white rounded px-3 py-2 mb-6" value={password} onChange={e => setPassword(e.target.value)} />
-        <button disabled={busy} className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 disabled:opacity-50">{busy ? 'Logging in...' : 'Login'}</button>
+        <button disabled={busy} className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition-colors duration-150 disabled:opacity-50">{busy ? 'Logging in...' : 'Login'}</button>
       </form>
     </div>
   );
@@ -1000,9 +998,9 @@ const pages = { Dashboard, Inventory, Transfers, Alerts, 'Expiry Timeline': Expi
       <Sidebar page={page} setPage={setPage} open={sidebarOpen} setOpen={setSidebarOpen} />
       <div className="flex-1 min-w-0">
         <Topbar setOpen={setSidebarOpen} title={page} />
-        <div className="p-4 md:p-6">
-          <Page />
-        </div>
+        <div className="p-4 md:p-6 animate-fadein" key={page}>
+  <Page />
+</div>
       </div>
     </div>
   );

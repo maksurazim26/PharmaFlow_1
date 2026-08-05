@@ -31,17 +31,18 @@ class DatabaseSeeder extends Seeder
         ];
 
         // Admin user
-        User::create([
-            'depot_id' => $depots[0]->id,
-            'name' => 'Super Admin',
-            'email' => 'admin@pharmaflow.com',
-            'password' => Hash::make('password'),
-            'role' => 'super_admin',
-        ]);
+        // Admin user — credentials pulled from .env, never hardcoded
+User::create([
+    'depot_id' => $depots[0]->id,
+    'name' => env('ADMIN_NAME', 'Super Admin'),
+    'email' => env('ADMIN_EMAIL', 'admin@pharmaflow.com'),
+    'password' => Hash::make(env('ADMIN_PASSWORD', 'password')),
+    'role' => 'super_admin',
+]);
 
         // Extra sample users for different roles
-        User::create(['depot_id' => $depots[0]->id, 'name' => 'Dhaka Manager', 'email' => 'manager.dhaka@pharmaflow.com', 'password' => Hash::make('password'), 'role' => 'depot_manager']);
-        User::create(['depot_id' => $depots[2]->id, 'name' => 'Rajshahi Staff', 'email' => 'staff.rajshahi@pharmaflow.com', 'password' => Hash::make('password'), 'role' => 'staff']);
+        User::create(['depot_id' => $depots[0]->id, 'name' => 'Dhaka Manager', 'email' => 'manager@pharmaflow.com', 'password' => Hash::make('password'), 'role' => 'depot_manager']);
+        User::create(['depot_id' => $depots[2]->id, 'name' => 'Rajshahi Staff', 'email' => 'staff@pharmaflow.com', 'password' => Hash::make('password'), 'role' => 'staff']);
 
         // Suppliers
         $supplierA = Supplier::create(['name' => 'Square Pharmaceuticals', 'contact_person' => 'Nasrin Akter', 'email' => 'contact@squarepharma.com', 'phone' => '01800000001', 'lead_time_days' => 4]);
